@@ -46,8 +46,6 @@ export function ToastContainer(
   return (
     <Container
       toastClassName={(context) => {
-        console.log(context)
-
         return twMerge(
           contextClass[context?.type || "default"],
           " min-h-[62px] shadow-lg p-3 relative flex mb-3 rounded-md overflow-hidden cursor-pointer text-sm font-semibold"

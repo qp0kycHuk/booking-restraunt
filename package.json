@@ -12,11 +12,14 @@
   "dependencies": {
     "@fancyapps/ui": "^5.0.35",
     "@headlessui/react": "^1.7.18",
-    "@qpokychuk/fonts": "^1.0.10",
+    "@qpokychuk/inter": "^1.0.2",
     "@tippyjs/react": "^4.2.6",
+    "firebase": "^10.12.3",
     "js-cookie": "^3.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.52.1",
+    "react-router-dom": "^6.24.1",
     "react-toastify": "^10.0.5",
     "tailwind-merge": "^2.2.1"
   },

@@ -4,6 +4,8 @@ import App from "./App.tsx"
 import { Provider } from "./Provider.tsx"
 import "./index.scss"
 
+
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider>
