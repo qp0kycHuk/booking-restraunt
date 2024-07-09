@@ -4,7 +4,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth"
-import { LoginPayload } from "../types"
+import { LoginPayload, RegisterPayload } from "../types"
 
 export const api = {
   async login({ email, password }: LoginPayload) {
@@ -16,7 +16,7 @@ export const api = {
 
     return userCredential.user
   },
-  async register(email: string, password: string) {
+  async register({ email, password }: RegisterPayload) {
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,

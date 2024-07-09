@@ -1,31 +1,27 @@
-import { FirebaseError } from "firebase/app"
 import { useForm, SubmitHandler } from "react-hook-form"
-import { toast } from "react-toastify"
-import { api } from "../service/api"
 import { LoginPayload } from "../types"
+import { useToggle } from "@/hooks"
+import { CirclePreloader } from "@/components/CirclePreloader/CirclePreloader"
+import { useAuth } from "../Provider"
+import { Link } from "react-router-dom"
 
 export function Login() {
+  const [loading, , loadingStart, loadingEnd] = useToggle()
   const { register, handleSubmit } = useForm<Inputs>()
+  const auth = useAuth()
 
   const submitHandler: SubmitHandler<Inputs> = async ({ email, password }) => {
-    try {
-      const result = await api.login({ email, password })
-    } catch (error) {
-      if (error instanceof FirebaseError) {
-        toast.error(
-          <>
-            <div className="font-semibold">{error.message}</div>
-            <div className="opacity-60">{error.code}</div>
-          </>
-        )
-      }
-    }
+    loadingStart()
+
+    await auth.login({ email, password })
+
+    loadingEnd()
   }
 
   return (
     <section>
       <form
-        className="flex flex-col max-w-xl gap-3 p-8 m-auto bg-l3 rounded-2xl"
+        className="flex flex-col max-w-lg gap-3 p-8 m-auto bg-l3 rounded-2xl"
         onSubmit={handleSubmit(submitHandler)}
       >
         <div className="text-2xl font-semibold">Войти</div>
@@ -41,7 +37,15 @@ export function Login() {
           placeholder="Пароль"
           {...register("password")}
         />
-        <button className="rounded-md btn btn-primary btn-fill">Войти</button>
+        <button
+          className="rounded-md btn btn-primary btn-fill"
+          disabled={loading}
+        >
+          {loading ? <CirclePreloader /> : "Войти"}
+        </button>
+        <Link className="rounded-md btn btn-primary" to="/register/">
+          Зарегестрироваться
+        </Link>
       </form>
     </section>
   )
